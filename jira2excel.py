@@ -74,9 +74,9 @@ def excel_issue(dict, type, style):
     sep='\t'
     worksheet.write_row(row, 0, (
         type,
-        dict.get('id') if (style == 'Initiative' or style == 'Other') else '',
+        dict.get('id') if style == 'Initiative' else '',
         dict.get('id') if style == 'Epic' else '',
-        dict.get('id') if style == 'Story' else '',
+        dict.get('id') if (style == 'Story' or style == 'Other') else '',
         dict.get('status'),
         #'    '* indent_level +  dict.get('summary'),
         #dict.get('summary'),
@@ -161,8 +161,6 @@ for issue_id in (sys.argv):
         #crawl story
         t=1
     else:
-        print issue_type
-        print get_issue_details(issue_id)
         excel_issue(get_issue_details(issue_id),issue_type,'Other')
 
 format_wrap = workbook.add_format({'text_wrap': True, 'align': 'top'})
